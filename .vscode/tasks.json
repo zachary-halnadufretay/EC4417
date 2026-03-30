@@ -1,0 +1,36 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Setup Python Environment",
+      "type": "shell",
+      "command": "if [ ! -d '.venv' ]; then if command -v uv &> /dev/null; then echo 'Using uv...'; echo 'Creating virtual environment with uv...'; uv venv --seed --clear && uv sync; else echo 'uv not found, installing uv...'; if curl -LsSf https://astral.sh/uv/install.sh | sh; then export PATH=\"$HOME/.cargo/bin:$PATH\"; if command -v uv &> /dev/null; then echo 'uv installed successfully, creating virtual environment...'; uv venv --seed --clear && uv sync; else echo 'uv installation failed, trying pyenv...'; if command -v pyenv &> /dev/null; then echo 'Using pyenv...'; if [ -f '.python-version' ]; then pyver=$(cat .python-version); echo \"Setting Python version to $pyver\"; pyenv local $pyver; fi; echo 'Creating virtual environment with pyenv...'; python -m venv .venv && source .venv/bin/activate && pip install -e .; elif command -v conda &> /dev/null; then echo 'Using conda...'; if [ -f 'environment.yml' ]; then echo 'Creating conda environment from environment.yml...'; conda env create -f environment.yml; elif [ -f 'pyproject.toml' ]; then echo 'Creating conda environment and installing from pyproject.toml...'; conda create -n cflabs python -y && conda activate cflabs && pip install -e .; else echo 'Creating basic conda environment...'; conda create -n cflabs python -y; fi; else echo 'No Python environment manager found and uv installation failed. Please install uv, pyenv, or conda manually.'; fi; fi; else echo 'uv installation failed, trying pyenv...'; if command -v pyenv &> /dev/null; then echo 'Using pyenv...'; if [ -f '.python-version' ]; then pyver=$(cat .python-version); echo \"Setting Python version to $pyver\"; pyenv local $pyver; fi; echo 'Creating virtual environment with pyenv...'; python -m venv .venv && source .venv/bin/activate && pip install -e .; elif command -v conda &> /dev/null; then echo 'Using conda...'; if [ -f 'environment.yml' ]; then echo 'Creating conda environment from environment.yml...'; conda env create -f environment.yml; elif [ -f 'pyproject.toml' ]; then echo 'Creating conda environment and installing from pyproject.toml...'; conda create -n cflabs python -y && conda activate cflabs && pip install -e .; else echo 'Creating basic conda environment...'; conda create -n cflabs python -y; fi; else echo 'No Python environment manager found and uv installation failed. Please install uv, pyenv, or conda manually.'; fi; fi; fi; else echo 'Virtual environment already exists at .venv'; fi",
+      "windows": {
+        "type": "process",
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "${workspaceFolder}\\.vscode\\setup_env.ps1"
+        ]
+      },
+      "osx": {
+        "command": "if [ ! -d '.venv' ]; then if command -v uv &> /dev/null; then echo 'Using uv...'; echo 'Creating virtual environment with uv...'; uv venv --seed --clear && uv sync; else echo 'uv not found, installing uv...'; if curl -LsSf https://astral.sh/uv/install.sh | sh; then export PATH=\"$HOME/.cargo/bin:$PATH\"; if command -v uv &> /dev/null; then echo 'uv installed successfully, creating virtual environment...'; uv venv --seed --clear && uv sync; else echo 'uv installation failed, trying pyenv...'; if command -v pyenv &> /dev/null; then echo 'Using pyenv...'; if [ -f '.python-version' ]; then pyver=$(cat .python-version); echo \"Setting Python version to $pyver\"; pyenv local $pyver; fi; echo 'Creating virtual environment with pyenv...'; python -m venv .venv && source .venv/bin/activate && pip install -e .; elif command -v conda &> /dev/null; then echo 'Using conda...'; if [ -f 'environment.yml' ]; then echo 'Creating conda environment from environment.yml...'; conda env create -f environment.yml; elif [ -f 'pyproject.toml' ]; then echo 'Creating conda environment and installing from pyproject.toml...'; conda create -n cflabs python -y && conda activate cflabs && pip install -e .; else echo 'Creating basic conda environment...'; conda create -n cflabs python -y; fi; else echo 'No Python environment manager found and uv installation failed. Please install uv, pyenv, or conda manually.'; fi; fi; else echo 'uv installation failed, trying pyenv...'; if command -v pyenv &> /dev/null; then echo 'Using pyenv...'; if [ -f '.python-version' ]; then pyver=$(cat .python-version); echo \"Setting Python version to $pyver\"; pyenv local $pyver; fi; echo 'Creating virtual environment with pyenv...'; python -m venv .venv && source .venv/bin/activate && pip install -e .; elif command -v conda &> /dev/null; then echo 'Using conda...'; if [ -f 'environment.yml' ]; then echo 'Creating conda environment from environment.yml...'; conda env create -f environment.yml; elif [ -f 'pyproject.toml' ]; then echo 'Creating conda environment and installing from pyproject.toml...'; conda create -n cflabs python -y && conda activate cflabs && pip install -e .; else echo 'Creating basic conda environment...'; conda create -n cflabs python -y; fi; else echo 'No Python environment manager found and uv installation failed. Please install uv, pyenv, or conda manually.'; fi; fi; fi; else echo 'Virtual environment already exists at .venv'; fi"
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}

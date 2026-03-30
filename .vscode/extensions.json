@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "GitHub.copilot-chat",
+    "ms-toolsai.jupyter",
+    "ms-python.python",
+    "ms-python.black-formatter",
+    "GrapeCity.gc-excelviewer"
+  ]
+}
