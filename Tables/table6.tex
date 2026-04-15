@@ -1,0 +1,22 @@
+\documentclass[border=10pt, varwidth=\maxdimen]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+
+\begin{document}
+
+\begin{tabular}{@{}l c c c c c c@{}}
+\multicolumn{7}{c}{\textbf{Table 6 - S\&P 500 ETF and Index Data and Statistics}} \\[6pt]
+\toprule
+\toprule
+ & & & & & \multicolumn{2}{c}{Jarque-Bera} \\
+ & $E(r)$ & $\sigma^2$ & Skewness & Kurtosis & Statistic & p-value \\
+\midrule
+SPY & 12.5 & 0.151 & $-$0.433 & 0.678 & 6.0172 & 0.0494 \\
+SPX & 12.5 & 0.15 & $-$0.423 & 0.618 & 5.461 & 0.0652 \\
+\bottomrule
+\multicolumn{7}{@{}p{32em}@{}}{\small\textit{The expected return (E(r)) and volatility ($\sigma$\textsuperscript{2}) are annualised percents. The Skewness and Kurtosis test statistics are calculated monthly.}} \\
+\end{tabular}
+
+\end{document}
